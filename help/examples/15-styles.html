@@ -18,7 +18,7 @@
 (function($) {
 	$(document).ready(function() {
 		$('#wysiwyg').wysiwyg({ 
-			css   : "http://fonts.googleapis.com/css?family=Rochester|Metrophobic",
+			css   : ["http://fonts.googleapis.com/css?family=Rochester", "http://fonts.googleapis.com/css?family=Metrophobic"],
 			style : "h1 { color:#900; font-family: Rochester, cursive; }\nh2 { color : #fc0; font-family : Metrophobic, serif; }"
 		});
 	});
@@ -29,6 +29,7 @@
 	<h1>jWYSIWYG</h1>
 	<h2>Example: Basic</h2>
 	<textarea id="wysiwyg" rows="5" cols="80">
+	<p>Using external css files from Google to format headers inside the editor</p>
 	<h1>Rochester font</h1>
 	<h2>Metrophobic font</h2>
 	</textarea>

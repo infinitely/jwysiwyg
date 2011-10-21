@@ -1457,15 +1457,16 @@ html: '<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.o
 			}
 
 			if (self.options.css) {
-				if (String === self.options.css.constructor) {
+
+				var write_css = function( css_file ) {
 					if ($.browser.msie) {
-						stylesheet = self.editorDoc.createStyleSheet(self.options.css);
+						stylesheet = self.editorDoc.createStyleSheet(css_file);
 						$(stylesheet).attr({
 							"media":	"all"
 						});
 					} else {
 						stylesheet = $("<link/>").attr({
-							"href":		self.options.css,
+							"href":		css_file,
 							"media":	"all",
 							"rel":		"stylesheet",
 							"type":		"text/css"
@@ -1473,6 +1474,17 @@ html: '<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.o
 
 						$(self.editorDoc).find("head").append(stylesheet);
 					}
+				};
+
+				if (String === self.options.css.constructor) {
+					write_css( self.options.css );
+
+				} else if (self.options.css instanceof Array) {
+					for (var i=0; i < self.options.css.length; i++) {
+						write_css( self.options.css[i] );	
+					}
+
+
 				} else {
 					self.timers.initFrame_Css = window.setTimeout(function () {
 						$(self.editorDoc.body).css(self.options.css);
@@ -1483,6 +1495,12 @@ html: '<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.o
 			if (self.options.style) {
 				if (String === self.options.style.constructor) {
 					$(self.editorDoc).find("head").append("<style>" + self.options.style + "</style>");
+				}
+			}
+
+			if (self.options.css_class) {
+				if (String === self.options.css_class.constructor) {
+					$(self.editorDoc).find("body").addClass(self.options.css_class);
 				}
 			}
 
