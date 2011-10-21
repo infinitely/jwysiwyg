@@ -498,6 +498,7 @@ html: '<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.o
 			debug: false,
 			controls: {},
 			css: {},
+			styles: "",
 			events: {},
 			autoGrow: false,
 			autoSave: true,
@@ -1476,6 +1477,12 @@ html: '<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.o
 					self.timers.initFrame_Css = window.setTimeout(function () {
 						$(self.editorDoc.body).css(self.options.css);
 					}, 0);
+				}
+			}
+
+			if (self.options.style) {
+				if (String === self.options.style.constructor) {
+					$(self.editorDoc).find("head").append("<style>" + self.options.style + "</style>");
 				}
 			}
 
